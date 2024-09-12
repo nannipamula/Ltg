@@ -130,7 +130,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto d-flex">                        
+                    <ul class="navbar-nav mr-auto d-flex">  
+                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Template Editor</a>
+                     </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "LetterGenerate" ? "active" : "")">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LetterGenerate">PDF Generator</a>
                         </li>
