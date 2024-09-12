@@ -133,8 +133,20 @@
                 @{ 
                     if (ViewBag.TemplatePath != null)
                     {
-                        var htmlCode = System.IO.File.ReadAllText($@"wwwroot\Templates\{ViewBag.TemplatePath}.html");
-                                @Html.Raw(htmlCode)
+                        // Get the full path to the template file using ViewBag.WebRootPath
+                        var htmlFilePath = System.IO.Path.Combine(ViewBag.WebRootPath.ToString(), $"{ViewBag.TemplatePath}.html");
+
+                        // Ensure the file exists before attempting to read it
+                        if (System.IO.File.Exists(htmlFilePath))
+                        {
+                            // Read the HTML content of the template file
+                            var htmlCode = System.IO.File.ReadAllText(htmlFilePath);
+                            @Html.Raw(htmlCode)
+                        }
+                        else
+                        {
+                        <p>Template not found.</p>
+                        }
                     }
                 }
        </textarea>
