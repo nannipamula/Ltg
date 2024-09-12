@@ -55,21 +55,30 @@ namespace Template.Controllers
         
         //This code is used to get the index view of a module.
         [HttpGet]
-        public IActionResult Index(string ModuleName)
+       public IActionResult Index(string ModuleName)
         {
-            //Set the ViewBag to the ModuleName
-            ViewBag.TemplatePath = ModuleName;
-
-            //Create a string to store the path of the templates
+            // Create a string to store the path of the templates
             string templatePath = Path.Combine(_webHostEnvironment.WebRootPath, "Templates");
-            //Set the ViewBag to the list of files in the template path
-            string[] listOfTemplates = Directory.EnumerateFiles(templatePath, "*", SearchOption.AllDirectories).ToArray();
+        
+            // Set the ViewBag to the list of files in the template path
+            string[] listOfTemplates = Directory.EnumerateFiles(templatePath, "*.html", SearchOption.AllDirectories).ToArray();
             ViewBag.ListOfTemplates = listOfTemplates;
-            if (String.IsNullOrEmpty(ModuleName))
+        
+            // Pass WebRootPath to the view
+            ViewBag.WebRootPath = _webHostEnvironment.WebRootPath;
+        
+            // If ModuleName is provided, use it as the template path
+            if (!String.IsNullOrEmpty(ModuleName))
             {
-                ViewBag.TemplatePath = Path.GetFileNameWithoutExtension(listOfTemplates[0]);
+                ViewBag.TemplatePath = Path.Combine("Templates", ModuleName);
             }
-            //Return the view
+            else
+            {
+                // Default to the first template if no ModuleName is provided
+                ViewBag.TemplatePath = Path.Combine("Templates", Path.GetFileNameWithoutExtension(listOfTemplates[0]));
+            }
+        
+            // Return the view
             return View();
         }
 
