@@ -912,9 +912,10 @@
                 form.submit(); // Trigger the form to open the download link
                 form.remove();
             },
-            error: function (xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, error) {
                 document.getElementById("loader").style.display = "none";
-                alert("Error occurred while generating the PDF");
+                alert("Error occurred while generating the PDF"); 
+                console.log(error);            
             }
         });
 
