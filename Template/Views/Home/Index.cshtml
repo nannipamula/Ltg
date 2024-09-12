@@ -131,7 +131,7 @@
 
             <textarea id="editor">
                 @{ 
-                    if (ViewBag.TemplatePath != null)
+                    if (ViewBag.TemplatePath != null && ViewBag.WebRootPath != null)
                     {
                         // Get the full path to the template file using ViewBag.WebRootPath
                         var htmlFilePath = System.IO.Path.Combine(ViewBag.WebRootPath.ToString(), $"{ViewBag.TemplatePath}.html");
