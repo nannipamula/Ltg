@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\**" CopyToPublishDirectory="PreserveNewest" />
     <None Include="wwwroot\Signatures\Exit.html" />
     <None Include="wwwroot\sampletemplates\Onboarding.html" />
   </ItemGroup>
