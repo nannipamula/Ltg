@@ -21,7 +21,7 @@ namespace Template.Controllers
             if (userName == hardcodedUserName && passWord == hardcodedPassword)
             {
                 // Redirect to Index if the login is successful
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("LetterGenerate", "Home");
             }
 
             // If login fails, set an error message and return to login view
