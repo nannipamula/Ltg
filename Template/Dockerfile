@@ -15,11 +15,12 @@ COPY ["Template/Template.csproj", "Template/"]
 RUN dotnet restore "./Template/Template.csproj"
 COPY . .
 WORKDIR "/src/Template"
-RUN dotnet build "./Template.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./Template.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Template.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Template.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN apt-get update && apt-get install -y libgdiplus libc6-dev
 
 FROM base AS final
 WORKDIR /app
