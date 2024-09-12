@@ -86,7 +86,7 @@ namespace Template.Controllers
         public IActionResult Index(string content, string templaneName, string moduleName)
         {
 
-            var filePath = _webHostEnvironment.WebRootPath + $"/{templaneName}.html";
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, $"{templaneName}.html");
             System.IO.File.WriteAllText(filePath, content);
             ViewBag.TemplatePath = moduleName;
             return View();
